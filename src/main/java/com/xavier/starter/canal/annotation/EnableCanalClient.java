@@ -9,8 +9,7 @@ import java.lang.annotation.*;
 /**
  * Enables the canal client
  *
- * @author chen.qian
- * @date 2018/3/19
+ * @author NewGr8Player
  */
 
 @Target(ElementType.TYPE)

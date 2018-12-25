@@ -1,50 +1,49 @@
 # starter-canal-copy
-A copy of chenqian56131/spring-boot-starter-canal.
-
-**源项目地址:[spring-boot-starter-canal](https://github.com/chenqian56131/spring-boot-starter-canal)**
-> 个人学习使用，仅更改包名，修改pom文件，方便打包，保留原有所有注释与说明
 
 [在Maven中使用](https://github.com/NewGr8Player/maven-repo)
 
 # spring-boot-starter-canal
 ## canal starter
 
-### eg(annotation):
+### 注解使用Demo:
 
 -------------------------
-```
+
+```java
 @CanalEventListener
 public class MyEventListener {
 
     @InsertListenPoint
-    public void onEvent(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
+    public void onEvent(String tableName,CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
         //do something...
     }
 
     @UpdateListenPoint
-    public void onEvent1(CanalEntry.RowData rowData) {
+    public void onEvent1(String tableName,CanalEntry.RowData rowData) {
         //do something...
     }
 
     @DeleteListenPoint
-    public void onEvent3(CanalEntry.EventType eventType) {
+    public void onEvent3(String tableName,CanalEntry.EventType eventType) {
         //do something...
     }
 
     @ListenPoint(destination = "example", schema = "canal-test", table = {"t_user", "test_table"}, eventType = CanalEntry.EventType.UPDATE)
-    public void onEvent4(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
+    public void onEvent4(String tableName,CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
         //do something...
     }
 }
 ```
 
-### eg(interface):
+### 实现接口Demo:
+
 -------------------------------
-```
+
+```java
 @Component
 public class MyEventListener2 implements CanalEventListener {
     @Override
-    public void onEvent(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
+    public void onEvent(String tableName,CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
         //do something...
     }
 }
@@ -52,33 +51,31 @@ public class MyEventListener2 implements CanalEventListener {
 @Component
 public class MyEventListener2 implements DmlCanalEventListener {
     @Override
-    public void onInsert(CanalEntry.RowData rowData) {
+    public void onInsert(String tableName,CanalEntry.RowData rowData) {
         //do something...
     }
 
     @Override
-    public void onUpdate(CanalEntry.RowData rowData) {
+    public void onUpdate(String tableName,CanalEntry.RowData rowData) {
         //do something...
     }
 
     @Override
-    public void onDelete(CanalEntry.RowData rowData) {
+    public void onDelete(String tableName,CanalEntry.RowData rowData) {
         //do something...
     }
 }
-
 ```
 
 ## Config
-| config      |    describe |
-| :------- | :-------|
-| canal.client.instances.{destination}.clusterEnabled | enable cluster mod |
-| canal.client.instances.{destination}.zookeeperAddress | zookeeper address(required when clusterEnabled is true) |
-| canal.client.instances.{destination}.host | canal server host(required when clusterEnabled is false) |
-| canal.client.instances.{destination}.port  | canal server port (required when clusterEnabled is false)|
-| canal.client.instances.{destination}.batchSize  | size when trying to get messages from server |
-| canal.client.instances.{destination}.acquireInterval  | interval of acquiring the messages |
-| canal.client.instances.{destination}.filter  | client's subscribe-filter |
-| canal.client.instances.{destination}.userName  | user name |
-| canal.client.instances.{destination}.password  | password |
-| canal.client.instances.{destination}.retryCount  | retry count when error occurred such as IoException. |
+```yaml
+canal:
+  client:
+    instances:
+      example: # 实例名，可配置多个该节点 String
+        host: 127.0.0.1 # ip或域名 String
+        port: 11111 # 端口 Integer
+        batch-size: 1000 # 最大并发消息数量 Integer
+        cluster-enabled: false # 集群模式 boolean
+        zookeeper-address: # 当集群模式开启时，需要填写该地址,多个使用逗号分隔
+```

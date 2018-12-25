@@ -8,8 +8,7 @@ import java.lang.annotation.*;
 /**
  * ListenPoint for update
  *
- * @author chen.qian
- * @date 2018/3/19
+ * @author NewGr8Player
  */
 
 @Target({ElementType.METHOD})
@@ -18,28 +17,31 @@ import java.lang.annotation.*;
 @ListenPoint(eventType = CanalEntry.EventType.UPDATE)
 public @interface UpdateListenPoint {
 
-    /**
-     * canal destination
-     * default for all
-     * @return canal destination
-     */
-    @AliasFor(annotation = ListenPoint.class)
-    String destination() default "";
+	/**
+	 * canal destination
+	 * default for all
+	 *
+	 * @return canal destination
+	 */
+	@AliasFor(annotation = ListenPoint.class)
+	String destination() default "";
 
-    /**
-     * database schema which you are concentrate on
-     * default for all
-     * @return canal destination
-     */
-    @AliasFor(annotation = ListenPoint.class)
-    String[] schema() default {};
+	/**
+	 * database schema which you are concentrate on
+	 * default for all
+	 *
+	 * @return canal destination
+	 */
+	@AliasFor(annotation = ListenPoint.class)
+	String[] schema() default {};
 
-    /**
-     * tables which you are concentrate on
-     * default for all
-     * @return canal destination
-     */
-    @AliasFor(annotation = ListenPoint.class)
-    String[] table() default {};
+	/**
+	 * tables which you are concentrate on
+	 * default for all
+	 *
+	 * @return canal destination
+	 */
+	@AliasFor(annotation = ListenPoint.class)
+	String[] table() default {};
 
 }

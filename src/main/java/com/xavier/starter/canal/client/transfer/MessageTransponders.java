@@ -1,13 +1,12 @@
 package com.xavier.starter.canal.client.transfer;
 
 /**
- * @author chen.qian
- * @date 2018/3/23
+ * @author NewGr8Player
  */
 public class MessageTransponders {
 
-    public static TransponderFactory defaultMessageTransponder() {
-        return new DefaultTransponderFactory();
-    }
+	public static TransponderFactory defaultMessageTransponder() {
+		return new DefaultTransponderFactory();
+	}
 
 }

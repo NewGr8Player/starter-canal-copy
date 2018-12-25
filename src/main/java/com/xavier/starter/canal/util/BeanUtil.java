@@ -11,46 +11,47 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author chen.qian
- * @date 2018/3/16
+ * BeanUtil
+ *
+ * @author NewGr8Player
  */
 @Component
 public class BeanUtil implements ApplicationContextAware {
 
-    private static ApplicationContext applicationContext;
+	private static ApplicationContext applicationContext;
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        BeanUtil.applicationContext = applicationContext;
-    }
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		BeanUtil.applicationContext = applicationContext;
+	}
 
-    public static <T> T getBean(Class<T> clazz) {
-        T obj;
-        try {
-            obj = applicationContext.getBean(clazz);
-        } catch (Exception e) {
-            obj = null;
-        }
-        return obj;
-    }
+	public static <T> T getBean(Class<T> clazz) {
+		T obj;
+		try {
+			obj = applicationContext.getBean(clazz);
+		} catch (Exception e) {
+			obj = null;
+		}
+		return obj;
+	}
 
-    public static <T> List<T> getBeansOfType(Class<T> clazz) {
-        Map<String, T> map;
-        try {
-            map = applicationContext.getBeansOfType(clazz);
-        } catch (Exception e) {
-            map = null;
-        }
-        return map == null ? null : new ArrayList<>(map.values());
-    }
+	public static <T> List<T> getBeansOfType(Class<T> clazz) {
+		Map<String, T> map;
+		try {
+			map = applicationContext.getBeansOfType(clazz);
+		} catch (Exception e) {
+			map = null;
+		}
+		return map == null ? null : new ArrayList<>(map.values());
+	}
 
-    public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> anno) {
-        Map<String, Object> map;
-        try {
-            map = applicationContext.getBeansWithAnnotation(anno);
-        } catch (Exception e) {
-            map = null;
-        }
-        return map;
-    }
+	public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> anno) {
+		Map<String, Object> map;
+		try {
+			map = applicationContext.getBeansWithAnnotation(anno);
+		} catch (Exception e) {
+			map = null;
+		}
+		return map;
+	}
 }

@@ -6,4 +6,5 @@
       "type": "java.util.Map<java.lang.String,com.xavier.starter.canal.config.CanalConfig.Instance>",
       "description": "Description for canal.client.host."
     }
-] }
+  ]
+}

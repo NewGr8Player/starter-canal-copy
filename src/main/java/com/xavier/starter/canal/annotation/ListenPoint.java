@@ -8,8 +8,7 @@ import java.lang.annotation.*;
  * used to indicate that method(or methods) is(are) the candidate of the
  * canal event distributor
  *
- * @author chen.qian
- * @date 2018/3/19
+ * @author NewGr8Player
  */
 
 @Target({ElementType.METHOD, ElementType.TYPE})
@@ -17,32 +16,36 @@ import java.lang.annotation.*;
 @Documented
 public @interface ListenPoint {
 
-    /**
-     * canal destination
-     * default for all
-     * @return canal destination
-     */
-    String destination() default "";
+	/**
+	 * canal destination
+	 * default for all
+	 *
+	 * @return canal destination
+	 */
+	String destination() default "";
 
-    /**
-     * database schema which you are concentrate on
-     * default for all
-     * @return canal destination
-     */
-    String[] schema() default {};
+	/**
+	 * database schema which you are concentrate on
+	 * default for all
+	 *
+	 * @return canal destination
+	 */
+	String[] schema() default {};
 
-    /**
-     * tables which you are concentrate on
-     * default for all
-     * @return canal destination
-     */
-    String[] table() default {};
+	/**
+	 * tables which you are concentrate on
+	 * default for all
+	 *
+	 * @return canal destination
+	 */
+	String[] table() default {};
 
-    /**
-     * canal event type
-     * default for all
-     * @return canal event type
-     */
-    CanalEntry.EventType[] eventType() default {};
+	/**
+	 * canal event type
+	 * default for all
+	 *
+	 * @return canal event type
+	 */
+	CanalEntry.EventType[] eventType() default {};
 
 }

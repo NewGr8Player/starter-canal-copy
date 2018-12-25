@@ -9,8 +9,7 @@ import java.lang.annotation.*;
  * inject the present class to the spring context
  * as a listener of the canal event
  *
- * @author chen.qian
- * @date 2018/3/19
+ * @author NewGr8Player
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
@@ -18,7 +17,7 @@ import java.lang.annotation.*;
 @Component
 public @interface CanalEventListener {
 
-    @AliasFor(annotation = Component.class)
-    String value() default "";
+	@AliasFor(annotation = Component.class)
+	String value() default "";
 
 }

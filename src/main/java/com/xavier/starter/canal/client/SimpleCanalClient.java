@@ -6,6 +6,7 @@ import com.xavier.starter.canal.util.BeanUtil;
 import com.xavier.starter.canal.annotation.ListenPoint;
 import com.xavier.starter.canal.client.transfer.TransponderFactory;
 import com.xavier.starter.canal.config.CanalConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -21,9 +22,9 @@ import java.util.concurrent.TimeUnit;
  * SimpleCanalClient
  * use cache thread pool to handle the event
  *
- * @author chen.qian
- * @date 2018/3/16
+ * @author NewGr8Player
  */
+@Slf4j
 public class SimpleCanalClient extends AbstractCanalClient {
 
     /**
@@ -40,8 +41,6 @@ public class SimpleCanalClient extends AbstractCanalClient {
      * listeners which are used by annotation
      */
     private final List<ListenerPoint> annoListeners = new ArrayList<>();
-
-    private final static Logger logger = LoggerFactory.getLogger(SimpleCanalClient.class);
 
     public SimpleCanalClient(CanalConfig canalConfig, TransponderFactory factory) {
         super(canalConfig, factory);
@@ -66,7 +65,7 @@ public class SimpleCanalClient extends AbstractCanalClient {
      * init listeners
      */
     private void initListeners() {
-        logger.info("{}: initializing the listeners....", Thread.currentThread().getName());
+        log.info("{}: initializing the listeners....", Thread.currentThread().getName());
         List<com.xavier.starter.canal.event.CanalEventListener> list = BeanUtil.getBeansOfType(com.xavier.starter.canal.event.CanalEventListener.class);
         if (list != null) {
             listeners.addAll(list);
@@ -85,9 +84,9 @@ public class SimpleCanalClient extends AbstractCanalClient {
                 }
             }
         }
-        logger.info("{}: initializing the listeners end.", Thread.currentThread().getName());
-        if (logger.isWarnEnabled() && listeners.isEmpty() && annoListeners.isEmpty()) {
-            logger.warn("{}: No listener found in context! ", Thread.currentThread().getName());
+        log.info("{}: initializing the listeners end.", Thread.currentThread().getName());
+        if (log.isWarnEnabled() && listeners.isEmpty() && annoListeners.isEmpty()) {
+            log.warn("{}: No listener found in context! ", Thread.currentThread().getName());
         }
     }
 }

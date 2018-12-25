@@ -3,17 +3,19 @@ package com.xavier.starter.canal.event;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 
 /**
- * @author chen.qian
- * @date 2018/3/19
+ * CanalEventListener
+ *
+ * @author NewGr8Player
  */
 public interface CanalEventListener {
 
-    /**
-     * run when event was fired
-     *
-     * @param eventType eventType
-     * @param rowData rowData
-     */
-    void onEvent(CanalEntry.EventType eventType, CanalEntry.RowData rowData);
+	/**
+	 * run when event was fired
+	 *
+	 * @param tableName tableName
+	 * @param eventType eventType
+	 * @param entry     entry
+	 */
+	void onEvent(String tableName, CanalEntry.EventType eventType, CanalEntry.RowData entry);
 
 }
